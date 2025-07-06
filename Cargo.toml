@@ -12,6 +12,8 @@ tracing = "0.1.41"
 
 leptos = { version = "0.8.2", features = ["tracing"], default-features = false }
 leptos_meta = "0.8.2"
+leptos_router = "0.8.2"
+leptos-leaflet = "0.10.0"
 
 # SSR
 leptos_axum = {optional = true, version = "0.8.2"}
@@ -32,6 +34,7 @@ console_error_panic_hook = { optional = true, version ="0.1.7" }
 [features]
 hydrate = [
     "leptos/hydrate",
+    "leptos-leaflet/hydrate",
     "dep:wasm-bindgen",
     "dep:log",
     "dep:console_log",
@@ -39,6 +42,7 @@ hydrate = [
 ]
 ssr = [
     "leptos/ssr",
+    "leptos-leaflet/ssr",
     "dep:leptos_axum",
     "dep:tokio",
     "dep:axum",

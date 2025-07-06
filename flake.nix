@@ -28,22 +28,23 @@
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = let
-            channel = pkgs.fenix.complete.withComponents [
+            channel = pkgs.fenix.stable.withComponents [
               "cargo"
-              "clippy"
-              "rust-src"
               "rustc"
+              "clippy"
               "rustfmt"
+              "rust-src"
+              "rust-std"
+              "rust-analyzer"
             ];
 
             toolchain = pkgs.fenix.combine [
               channel
-              pkgs.fenix.targets.wasm32-unknown-unknown.latest.rust-std
+              pkgs.fenix.targets.wasm32-unknown-unknown.stable.rust-std
             ];
           in [
             toolchain
 
-            pkgs.rust-analyzer-nightly
             pkgs.cargo-leptos
             pkgs.binaryen
           ];
