@@ -9,7 +9,7 @@ edition = "2024"
 [workspace.dependencies]
 leptos = { version = "0.8.2", features = ["tracing"] }
 
-mapd-ui = {path = "./mapd-ui"}
+mapd-ui = { path = "./mapd-ui" }
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]
@@ -61,4 +61,3 @@ lib-package = "mapd-ui"
 lib-features = ["hydrate"]
 lib-default-features = false
 lib-profile-release = "wasm-release"
-

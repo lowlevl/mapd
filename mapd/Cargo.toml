@@ -6,17 +6,14 @@ edition.workspace = true
 [dependencies]
 axum = "0.8.4"
 
-
 tokio = { version = "1.46.1", features = ["macros", "rt-multi-thread"] }
 clap = { version = "4.5.40", features = ["derive"] }
 eyre = "0.6.12"
 
 tracing = "0.1.41"
-tracing-subscriber = {  version = "0.3.19", features = ["env-filter"] }
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 
 leptos.workspace = true
 leptos_axum = "0.8.2"
 
-
-mapd-ui = {workspace = true, features = ["ssr"]}
-
+mapd-ui = { workspace = true, features = ["ssr"] }
