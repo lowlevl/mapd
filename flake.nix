@@ -47,6 +47,7 @@
 
             pkgs.cargo-leptos
             pkgs.binaryen
+            pkgs.wasm-pack
           ];
         };
       }
