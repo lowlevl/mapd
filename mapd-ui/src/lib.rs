@@ -5,10 +5,13 @@ use leptos_router::{
     path,
 };
 
-mod gjson;
+mod not_found;
+use not_found::NotFound;
 
 mod map;
 use map::Map;
+
+mod gjson;
 
 #[cfg(feature = "ssr")]
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -30,33 +33,17 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
     }
 }
 
-#[component]
-fn NotFound() -> impl IntoView {
-    const PIN: &str = r#"
-#         #####          
-  #   ###       ###      
-    ##             ##    
-   ####   #####      #   
-  #######       #     #  
-  ##### ###      #    #  
-  ##### ####     #    #  
-  ###### #####  #     #  
-   ####### #####     #   
-    ##############  #    
-     ###############     
-      ############# #    
-        #########     #  
-         #######        #
-           ###           
-            #            
-"#;
+#[cfg(feature = "hydrate")]
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn hydrate() {
+    use leptos::{logging, mount};
 
-    view! {
-      <div class="not-found">
-        <pre class="pin">{PIN}</pre>
-        <span>404: this page does not exist.</span>
-      </div>
-    }
+    console_error_panic_hook::set_once();
+    console_log::init_with_level(log::Level::Debug).ok();
+
+    logging::log!("Rehydrating `{}` after SSR", env!("CARGO_PKG_NAME"));
+
+    mount::hydrate_body(Ui);
 }
 
 #[component]

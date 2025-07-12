@@ -1,53 +1,15 @@
-[package]
-name = "mapd"
-version = "0.1.0"
+[workspace]
+members = ["mapd", "mapd-ui"]
+resolver = "3"
+
+[workspace.package]
+version = "0.0.0"
 edition = "2024"
 
-[lib]
-crate-type = ["cdylib", "rlib"]
+[workspace.dependencies]
+leptos = { version = "0.8.2", features = ["tracing"] }
 
-[dependencies]
-eyre = "0.6.12"
-tracing = "0.1.41"
-
-leptos = { version = "0.8.2", features = ["tracing"], default-features = false }
-leptos_meta = "0.8.2"
-leptos_router = "0.8.2"
-leptos-leaflet = "0.10.0"
-
-# SSR
-leptos_axum = {optional = true, version = "0.8.2"}
-tokio = { optional = true, version = "1.46.1", features = ["macros", "rt-multi-thread"] }
-axum = { optional = true, version = "0.8.4"}
-
-clap = { optional = true, version = "4.5.40", features = ["derive"] }
-
-tracing-subscriber = { optional = true, version = "0.3.19", features = ["env-filter"] }
-
-# UI
-wasm-bindgen = "0.2.100" 
-
-log = { optional = true, version ="0.4.27" }
-console_log = { optional = true, version ="1.0.0"}
-console_error_panic_hook = { optional = true, version ="0.1.7" }
-
-[features]
-hydrate = [
-    "leptos/hydrate",
-    "leptos-leaflet/hydrate",
-    "dep:log",
-    "dep:console_log",
-    "dep:console_error_panic_hook",
-]
-ssr = [
-    "leptos/ssr",
-    "leptos-leaflet/ssr",
-    "dep:leptos_axum",
-    "dep:tokio",
-    "dep:axum",
-    "dep:clap",
-    "dep:tracing-subscriber",
-]
+mapd-ui = {path = "./mapd-ui"}
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]
@@ -57,7 +19,8 @@ lto = true
 codegen-units = 1
 panic = "abort"
 
-[package.metadata.leptos]
+[[workspace.metadata.leptos]]
+name = "mapd"
 
 # The site root folder is where cargo-leptos generate all output.
 # WARNING: all content of this folder will be erased on a rebuild. Use it in your server setup.
@@ -87,17 +50,15 @@ browserquery = "defaults"
 # The features to use when compiling the bin target
 #
 # Optional. Can be over-ridden with the command line parameter --bin-features
-bin-features = ["ssr"]
+bin-package = "mapd"
+bin-features = []
 bin-default-features = false
 
 # The features to use when compiling the lib target
 #
 # Optional. Can be over-ridden with the command line parameter --lib-features
+lib-package = "mapd-ui"
 lib-features = ["hydrate"]
 lib-default-features = false
-
-# The profile to use for the lib target when compiling for release
-#
-# Optional. Defaults to "release".
 lib-profile-release = "wasm-release"
 

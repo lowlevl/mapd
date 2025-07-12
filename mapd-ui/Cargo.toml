@@ -1,0 +1,38 @@
+[package]
+name = "mapd-ui"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2.100" 
+
+leptos.workspace = true
+leptos_meta = "0.8.2"
+leptos_router = "0.8.2"
+leptos-leaflet = "0.10.0"
+
+log = { optional = true, version ="0.4.27" }
+console_log = { optional = true, version ="1.0.0"}
+console_error_panic_hook = { optional = true, version ="0.1.7" }
+
+[features]
+ssr = []
+hydrate = [
+    "leptos/hydrate",
+    "leptos-leaflet/hydrate",
+    "dep:log",
+    "dep:console_log",
+    "dep:console_error_panic_hook",
+]
+
+# Defines a size-optimized profile for the WASM bundle in release mode
+[profile.wasm-release]
+inherits = "release"
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = "abort"
+

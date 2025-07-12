@@ -1,12 +1,11 @@
-#[cfg(feature = "ssr")]
+use axum::Router;
+use eyre::eyre;
+use leptos_axum::LeptosRoutes;
+use tracing::Level;
+use tracing_subscriber::EnvFilter;
+
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
-    use axum::Router;
-    use eyre::eyre;
-    use leptos_axum::LeptosRoutes;
-    use tracing::Level;
-    use tracing_subscriber::EnvFilter;
-
     tracing_subscriber::fmt()
         .with_env_filter(
             EnvFilter::builder()
@@ -20,13 +19,13 @@ async fn main() -> eyre::Result<()> {
     let app = Router::new()
         .leptos_routes(
             &lopts.clone(),
-            leptos_axum::generate_route_list(mapd::ui::Ui),
+            leptos_axum::generate_route_list(mapd_ui::Ui),
             {
                 let lopts = lopts.clone();
-                move || mapd::ui::shell(lopts.clone())
+                move || mapd_ui::shell(lopts.clone())
             },
         )
-        .fallback(leptos_axum::file_and_error_handler(mapd::ui::shell))
+        .fallback(leptos_axum::file_and_error_handler(mapd_ui::shell))
         .with_state(lopts.clone());
 
     tracing::info!(
@@ -39,6 +38,3 @@ async fn main() -> eyre::Result<()> {
         .await
         .map_err(Into::into)
 }
-
-#[cfg(not(feature = "ssr"))]
-fn main() {}
