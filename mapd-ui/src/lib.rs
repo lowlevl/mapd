@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_meta::{Html, Meta, Style, Title};
+use leptos_meta::{Html, Meta, Script, Style, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
     path,
@@ -56,6 +56,9 @@ pub fn Ui() -> impl IntoView {
 
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <Script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" />
+        <Stylesheet href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
         <Style>
         r#"

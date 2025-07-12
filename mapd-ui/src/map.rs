@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use leptos_leaflet::prelude::*;
-use leptos_meta::{Script, Style, Stylesheet};
+use leptos_meta::Style;
 use leptos_router::hooks::query_signal;
 
 use super::gjson::GeoJson;
@@ -30,9 +30,6 @@ pub fn Map() -> impl IntoView {
     let zoom = || z.get().unwrap_or(14.0);
 
     view! {
-      <Script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" />
-      <Stylesheet href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
       <Style>
       r#"
         .map {

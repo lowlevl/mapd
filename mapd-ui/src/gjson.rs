@@ -20,8 +20,10 @@ pub fn GeoJson() -> impl IntoView {
         .expect("a GeonJson shall only be used in the context of a MapContainer");
 
     Effect::new(move |_| {
-        let layer = GeoJson::new(&JsValue::undefined());
+        if ctx.map().is_some() {
+            let layer = GeoJson::new(&JsValue::undefined());
 
-        ctx.add_layer(&layer);
+            ctx.add_layer(&layer);
+        }
     });
 }
