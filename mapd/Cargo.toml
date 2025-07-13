@@ -7,7 +7,6 @@ edition.workspace = true
 axum = "0.8.4"
 
 tokio = { version = "1.46.1", features = ["macros", "rt-multi-thread"] }
-clap = { version = "4.5.40", features = ["derive"] }
 eyre = "0.6.12"
 
 tracing = "0.1.41"

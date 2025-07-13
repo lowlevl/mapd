@@ -57,7 +57,6 @@ pub fn Map() -> impl IntoView {
         events
         class="map"
         min_zoom=13.0
-        zoom_control=false
       >
         <TileLayer url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png" min_zoom=0.0 max_zoom=20.0 />
         <GeoJson />

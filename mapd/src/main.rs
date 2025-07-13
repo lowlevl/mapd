@@ -15,7 +15,7 @@ async fn main() -> eyre::Result<()> {
         .try_init()
         .map_err(|err| eyre!(err))?;
 
-    let lopts = leptos::config::get_configuration(None)?.leptos_options;
+    let lopts = leptos::config::get_configuration(Some("Cargo.toml"))?.leptos_options;
     let app = Router::new()
         .leptos_routes(
             &lopts.clone(),
