@@ -15,4 +15,8 @@ tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 leptos.workspace = true
 leptos_axum = "0.8.2"
 
+serde.workspace = true
+serde_yaml = "0.9.34"
+url = { version = "2.5.4", features = ["serde"] }
+
 mapd-ui = { workspace = true, features = ["ssr"] }

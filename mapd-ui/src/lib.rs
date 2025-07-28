@@ -10,8 +10,10 @@ use not_found::NotFound;
 
 mod map;
 use map::Map;
+use state::State;
 
 mod gjson;
+pub mod state;
 
 #[cfg(feature = "ssr")]
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -49,6 +51,8 @@ pub fn hydrate() {
 #[component]
 pub fn Ui() -> impl IntoView {
     leptos_meta::provide_meta_context();
+
+    let state = LocalResource::new(State::fetch);
 
     view! {
         <Html {..} lang="en" />

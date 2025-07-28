@@ -1,0 +1,10 @@
+service:
+  ui:
+    title: An untitled map
+    center: [48.84, 2.34]
+    zoom: 13.0
+
+  cache: ./target/attic
+  overpass: https://overpass-api.de/api/interpreter
+
+layers: []

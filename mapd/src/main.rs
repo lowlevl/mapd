@@ -1,8 +1,12 @@
-use axum::Router;
+use axum::{Json, Router};
 use eyre::eyre;
 use leptos_axum::LeptosRoutes;
+use mapd_ui::state::State;
 use tracing::Level;
 use tracing_subscriber::EnvFilter;
+
+mod config;
+use config::Config;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
@@ -15,8 +19,17 @@ async fn main() -> eyre::Result<()> {
         .try_init()
         .map_err(|err| eyre!(err))?;
 
+    let config = Config::load("mapd.yaml").await?;
+    let state = config.into_state().await?;
+
+    tracing::info!("Successfully loaded state: {state:?}");
+
     let lopts = leptos::config::get_configuration(Some("Cargo.toml"))?.leptos_options;
     let app = Router::new()
+        .route(
+            State::URI,
+            axum::routing::get(move || async move { Json(state) }),
+        )
         .leptos_routes(
             &lopts.clone(),
             leptos_axum::generate_route_list(mapd_ui::Ui),
